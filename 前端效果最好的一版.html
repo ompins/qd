@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>AI作品集 | AIGC视频 & 智能体展示</title>
+
+<style>
+:root{
+  --primary:#2563eb;
+  --bg:#f8fafc;
+  --text:#1e293b;
+}
+*{
+  box-sizing:border-box;
+  font-family:"Segoe UI",Arial,sans-serif;
+}
+body{
+  margin:0;
+  background:var(--bg);
+  color:var(--text);
+}
+
+header{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  padding:14px 40px;
+  background:#fff;
+  position:sticky;
+  top:0;
+  z-index:99;
+  box-shadow:0 2px 8px rgba(0,0,0,.05);
+}
+nav a{
+  margin-left:18px;
+  text-decoration:none;
+  color:var(--text);
+  font-size:14px;
+}
+nav a:hover{color:var(--primary)}
+
+.hero{
+  text-align:center;
+  padding:80px 20px;
+  background:linear-gradient(135deg,#eef2ff,#f8fafc);
+}
+.hero h1{font-size:36px;}
+.hero p{max-width:640px;margin:12px auto 24px;line-height:1.6;}
+.btn{
+  padding:12px 26px;
+  background:var(--primary);
+  color:#fff;
+  border-radius:6px;
+  text-decoration:none;
+  display:inline-block;
+  border:none;
+  cursor:pointer;
+}
+
+.section{
+  padding:60px 40px;
+  max-width:1100px;
+  margin:auto;
+}
+.section h2{
+  text-align:center;
+  margin-bottom:40px;
+}
+
+.video-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(320px,1fr));
+  gap:24px;
+}
+.video-card{
+  background:#fff;
+  border-radius:12px;
+  padding:16px;
+  box-shadow:0 6px 16px rgba(0,0,0,.08);
+  text-align:center;
+}
+.video-card img{
+  width:100%;
+  border-radius:10px;
+  margin-bottom:12px;
+}
+
+.agent{
+  text-align:center;
+  padding:30px;
+  border-radius:12px;
+  background:#fff;
+  box-shadow:0 6px 16px rgba(0,0,0,.06);
+}
+.agent img{width:72px;margin-bottom:12px;}
+
+/* 聊天框 */
+#chatbot{
+  position:fixed;
+  bottom:20px;
+  right:20px;
+  width:320px;
+  background:#fff;
+  border-radius:12px;
+  box-shadow:0 8px 24px rgba(0,0,0,.15);
+  overflow:hidden;
+  font-size:14px;
+  z-index:999;
+}
+#chatbot header{
+  background:var(--primary);
+  color:#fff;
+  padding:10px;
+  cursor:pointer;
+}
+#chatlog{
+  height:200px;
+  overflow-y:auto;
+  padding:10px;
+}
+.msg{
+  margin:6px 0;
+  padding:8px 10px;
+  border-radius:8px;
+  line-height:1.5;
+}
+.bot{background:#f1f5f9;}
+.user{background:#dbeafe;text-align:right;}
+#chatbot input{
+  width:100%;
+  border:none;
+  border-top:1px solid #eee;
+  padding:10px;
+}
+
+#openChatBtn{
+  position:fixed;
+  bottom:20px;
+  right:20px;
+  background:var(--primary);
+  color:#fff;
+  padding:10px 14px;
+  border-radius:20px;
+  cursor:pointer;
+  box-shadow:0 4px 12px rgba(0,0,0,.2);
+  z-index:998;
+  display:none;
+}
+
+footer{
+  text-align:center;
+  padding:20px;
+  font-size:13px;
+  color:#64748b;
+}
+</style>
+</head>
+
+<body>
+
+<header>
+  <div><strong>AI Portfolio</strong></div>
+  <nav>
+    <a href="javascript:void(0)" onclick="document.getElementById('top').scrollIntoView({behavior:'smooth'})">首页</a>
+    <a href="javascript:void(0)" onclick="document.getElementById('videos').scrollIntoView({behavior:'smooth'})">AIGC视频</a>
+    <a href="javascript:void(0)" onclick="document.getElementById('agent').scrollIntoView({behavior:'smooth'})">AI智能体</a>
+    <a href="javascript:void(0)" onclick="document.getElementById('contact').scrollIntoView({behavior:'smooth'})">联系</a>
+  </nav>
+</header>
+
+<section class="hero" id="top">
+  <h1>AIGC 创作展示平台</h1>
+  <p>
+    集成 AI 生成短视频、AI 智能体与智能问答系统，
+    全流程由 AIGC 工具辅助开发
+  </p>
+
+  <!-- ✅ 新增一行 -->
+  <p style="opacity:.85;margin-top:-6px;">
+    支持视频创作 · 志愿填报 · 智能对话 · 网页开发
+  </p>
+
+  <a class="btn" href="#videos">查看作品</a>
+</section>
+
+<!-- ✅ AIGC 短视频（带封面） -->
+<section id="videos" class="section">
+  <h2>AIGC 短视频作品</h2>
+  <div class="video-grid">
+
+    <div class="video-card">
+      <img src="cover1.png"
+           alt="古人辩论封面">
+      <p><strong>《古人辩论（度量）》</strong></p>
+      <a class="btn" href="https://www.bilibili.com/video/BV1dXEe6zEPh" target="_blank">
+        ▶ 在 B站观看
+      </a>
+    </div>
+
+    <div class="video-card">
+      <img src="cover2.png"
+           alt="AI创意短视频封面">
+      <p><strong>AI 创意短视频</strong></p>
+      <a class="btn" href="https://www.bilibili.com/video/BV1vDER6aEnG" target="_blank">
+        ▶ 在 B站观看
+      </a>
+    </div>
+
+  </div>
+</section>
+
+<section id="agent" class="section">
+  <h2>AI 智能体作品</h2>
+
+  <div class="agent">
+    <!-- ✅ 智能体示意图片 -->
+    <img src="agent.png"
+         alt="高考志愿智能体界面示意"
+         style="width:220px;margin-bottom:16px;border-radius:10px;box-shadow:0 4px 12px rgba(0,0,0,.1);">
+
+    <h3>高考志愿规划智能体（腾讯元器）</h3>
+
+    <p style="max-width:640px;margin:10px auto;line-height:1.8;">
+      ✅ 支持全国多省份高考政策解析<br>
+      ✅ 院校与专业数据实时查询<br>
+      ✅ 冲 / 稳 / 保 志愿方案智能生成<br>
+      ✅ 自然语言对话，使用门槛低
+    </p>
+
+    <a class="btn"
+       href="https://yuanqi.tencent.com/webim/#/chat/bgIGWH?appid=2066320071764652288&experience=true"
+       target="_blank">
+      立即体验智能体 →
+    </a>
+  </div>
+</section>
+
+<section id="contact" class="section">
+  <h2>联系我</h2>
+  <form 
+    style="max-width:600px;margin:auto;display:flex;flex-direction:column;gap:14px"
+    onsubmit="event.preventDefault();alert('✅ 感谢你的留言，我会尽快回复你！');this.reset();"
+  >
+    <input placeholder="姓名" required>
+    <input placeholder="邮箱" required type="email">
+    <textarea rows="4" placeholder="留言"></textarea>
+    <button class="btn" type="submit">提交</button>
+  </form>
+</section>
+
+<footer>
+  © 2026 AI Portfolio · AIGC辅助网页创作项目
+</footer>
+
+<!-- 聊天框 -->
+<div id="chatbot">
+  <header onclick="toggleChat()">💬 AI 小助手（点击收起）</header>
+  <div id="chatlog">
+    <div class="msg bot">
+      你好呀 👋 我是站内 AI 小助手<br>
+      你可以问我关于视频、智能体或网页的问题哦！
+    </div>
+  </div>
+  <input id="userInput" placeholder="输入问题…" onkeydown="if(event.key==='Enter')ask()">
+</div>
+
+<div id="openChatBtn" onclick="toggleChat()">💬 AI 助手</div>
+
+<script>
+function scrollToSection(id){
+  document.getElementById(id).scrollIntoView({behavior:'smooth'});
+}
+
+/* ===== 同义词归一化（核心）===== */
+function normalizeText(text){
+  return text
+    .toLowerCase()
+    .replace(/[？?！!。，,]/g, "")
+    .replace(/啥/g, "什么")
+    .replace(/嘛/g, "")
+    .replace(/呀/g, "")
+    .replace(/啊/g, "")
+    .replace(/呢/g, "")
+    .replace(/吧/g, "")
+    .trim();
+}
+
+const qa = {
+
+  /* ===== 打招呼 ===== */
+  "你好": "你好呀 👋 我是这个作品集的 AI 小助手，有什么想了解的都可以问我～",
+  "您好": "您好～我是站内 AI 小助手，可以帮你介绍 AIGC 视频和高考志愿智能体哦 😊",
+  "嗨": "嗨～我在这儿呢！想知道视频怎么做，还是智能体怎么用？",
+  "哈喽": "哈喽～有什么可以帮你的吗？",
+  "在吗": "在呢在呢 😄 随时为你介绍这个作品集～",
+  "hi": "Hi～我是 AI 小助手，欢迎来到我的作品集！",
+  "hello": "Hello～想了解 AIGC 视频还是高考志愿智能体？",
+
+  /* ===== 身份 ===== */
+  "你是谁": "我是这个作品集的 AI 小助手 😊，专门负责介绍站内的 AIGC 视频、高考志愿智能体和网页开发过程。",
+  "你是真人吗": "我不是真人，我是这个网站内置的 AI 小助手，用来展示 AIGC 在前端交互上的应用～",
+  "你是gpt吗": "我不是 GPT，也不是大模型，我是用 JavaScript 实现的规则型 AI 小助手，更适合课程展示场景。",
+  "你是chatgpt吗": "不是哦～我是本地运行的 AI 小助手，不涉及云端大模型，这样可以更稳定地用于作业展示。",
+
+  /* ===== 能力（重点） ===== */
+  "你会什么": "我会介绍这个作品集哦～比如 AIGC 视频是怎么做的、高考志愿智能体有什么功能，还有这个网页的开发过程。更复杂的问题，可以交给我的高考志愿 AI 智能体来处理 👉",
+  "你能干嘛": "我可以帮你了解这个网站的所有作品，包括视频创作、智能体功能和网页实现方式。",
+  "你有什么功能": "我的功能是：介绍 AIGC 作品、讲解高考志愿智能体、说明网页开发流程，并引导你体验真正的 AI 智能体。",
+  "功能": "我会介绍这个作品集哦～包括 AIGC 视频、高考志愿智能体和网页开发过程。深入问题可以体验我的高考志愿 AI 智能体 👉",
+
+  /* ===== AIGC 视频 ===== */
+  "视频": "这两条视频都是我用 AIGC 工具制作的，从脚本、画面到配音都由 AI 完成，最后用剪辑工具合成。",
+  "古人辩论": "《古人辩论（度量）》是用 AI 生成的国风动画，结合了 LLM 和 AI 绘画技术。",
+  "创意": "这条创意短视频是我做 AIGC 全流程创作的实验作品，用来探索 AI 在短视频领域的应用。",
+  "怎么做视频": "先用 AI 生成脚本和分镜，再用 AI 绘图工具生成画面，接着用 AI 配音，最后用剪辑软件合成。",
+
+  /* ===== AI 智能体 ===== */
+  "智能体": "这是我基于腾讯元器平台搭建的高考志愿规划智能体，能查学校、查专业、生成冲稳保志愿方案。",
+  "高考": "我的智能体专门针对高考志愿填报，支持新高考省份的规则解析和个性化方案生成。",
+  "志愿": "志愿填报的关键是位次换算和梯度设置，我的智能体可以自动生成合理的冲稳保方案。",
+  "元器": "腾讯元器是一个智能体搭建平台，我用它开发了高考志愿规划助手，不需要写复杂代码。",
+  "智能体能干嘛": "它可以帮你查院校、查专业、分析录取概率，还能根据你的分数生成志愿填报方案。",
+
+  /* ===== 网页 ===== */
+  "网页": "这是一个响应式作品集网页，适配电脑和手机，完全用 HTML + CSS + JavaScript 实现。",
+  "前端": "我用的是原生前端技术，没有使用框架，方便老师检查源码和提交作业。",
+  "怎么做的": "整个网页的结构、样式和部分文案，都是用 AI 辅助生成的，属于 AIGC 实践项目。",
+  "AIGC": "AIGC 是人工智能生成内容的简称，包括文字、图片、音频和视频，这个网站本身就是 AIGC 的应用案例。",
+
+  /* ===== 作业 ===== */
+  "作业": "这是我的《AI 辅助网页创作》课程作业，集成了 AIGC 视频、AI 智能体和前端交互系统。",
+  "项目": "该项目展示了 AIGC 在视频创作、智能体搭建和网页开发三个方向的综合应用能力。",
+
+  /* ===== 联系 ===== */
+  "联系": "你可以通过页面底部的联系表单给我留言，我会尽快回复你～",
+  "谢谢": "不客气，很高兴为你介绍我的作品 😊",
+  "再见": "再见啦～如果想深入了解志愿填报，记得去体验我的高考志愿 AI 智能体哦 👋"
+};
+
+function ask(){
+  const input = document.getElementById("userInput");
+  const log = document.getElementById("chatlog");
+  const rawText = input.value.trim();
+  if(!rawText) return;
+
+  log.innerHTML += `<div class="msg user">${rawText}</div>`;
+  log.innerHTML += `<div class="msg bot">正在思考…</div>`;
+  log.scrollTop = log.scrollHeight;
+  input.value = "";
+
+  const text = normalizeText(rawText);
+
+  setTimeout(()=>{
+    const thinking = document.querySelector("#chatlog .msg.bot:last-child");
+    let reply = "这个问题我还在学习中～<br>你可以去体验我的 <a href='https://yuanqi.tencent.com/webim/#/chat/bgIGWH?appid=2066320071764652288&experience=true' target='_blank'>高考志愿 AI 智能体</a>，它更专业 👉";
+
+    for(const k in qa){
+      if(text.includes(k)){
+        reply = qa[k];
+        break;
+      }
+    }
+
+    thinking.innerHTML = reply;
+    log.scrollTop = log.scrollHeight;
+  },800);
+}
+
+function toggleChat(){
+  const chat = document.getElementById("chatbot");
+  const btn = document.getElementById("openChatBtn");
+  chat.style.display = chat.style.display === "none" ? "block" : "none";
+  btn.style.display = chat.style.display === "none" ? "block" : "none";
+}
+</script>
+</body>
+</html>
