@@ -262,7 +262,7 @@ footer{
       你可以问我关于视频、智能体或网页的问题哦！
     </div>
   </div>
-  <input id="userInput" placeholder="输入问题…" onkeydown="if(event.key==='Enter')ask()">
+  <input id="userInput" placeholder="输入问题…">
 </div>
 
 <div id="openChatBtn" onclick="toggleChat()">💬 AI 助手</div>
@@ -318,28 +318,29 @@ function ask(){
     }
   }
 
- /* 未命中 → 调用 DeepSeek（统一语气） */
-puter.ai.chat(
-  `你是这个 AI 作品集网站的站内小助手。
+  /* 未命中 → 调用 DeepSeek */
+  puter.ai.chat(
+    `你是这个 AI 作品集网站的站内小助手。
 你的语气要活泼、简短、像学生做的作品，不要用官方 AI 口吻。
 不要说“我是人工智能助手”，直接回答问题就好。
 用户的问题是：${text}`,
-  { model: "deepseek/deepseek-chat" }
-)
-.then(res => {
-  // 去掉 DeepSeek 可能自带的自我介绍
-  let reply = res
-    .replace(/我是.*?助手/g, "")
-    .replace(/由.*?训练/g, "")
-    .trim();
+    { model: "deepseek/deepseek-chat" }
+  )
+  .then(res => {
+    let reply = res
+      .replace(/我是.*?助手/g, "")
+      .replace(/由.*?训练/g, "")
+      .trim();
 
-  updateLastMsg("🤖 " + reply);
-})
-.catch(() => {
-  updateLastMsg(
-    "这个问题我还在学习中～<br>你可以去体验我的 <a href='https://yuanqi.tencent.com/webim/#/chat/bgIGWH?appid=2066320071764652288&experience=true' target='_blank'>高考志愿 AI 智能体</a>，它更专业 👉"
-  );
-});
+    updateLastMsg("🤖 " + reply);
+  })
+  .catch(() => {
+    updateLastMsg(
+      "这个问题我还在学习中～<br>你可以去体验我的 <a href='https://yuanqi.tencent.com/webim/#/chat/bgIGWH?appid=2066320071764652288&experience=true' target='_blank'>高考志愿 AI 智能体</a>，它更专业 👉"
+    );
+  });
+}
+
 /* ===== 更新最后一条消息 ===== */
 function updateLastMsg(text){
   const log = document.getElementById("chatlog");
@@ -353,6 +354,13 @@ function toggleChat(){
   chat.style.display = chat.style.display === "none" ? "block" : "none";
   btn.style.display = chat.style.display === "none" ? "block" : "none";
 }
+
+/* ===== 回车发送 ===== */
+document.getElementById("userInput").addEventListener("keydown", function (e) {
+  if (e.key === "Enter") {
+    ask();
+  }
+});
 </script>
 </body>
 </html>
