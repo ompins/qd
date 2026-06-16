@@ -328,7 +328,7 @@ function ask(){
         content: text
       }
     ],
-    model: "deepseek/deepseek-chat"
+    model: "openai/gpt-3.5-turbo"
   })
   .then(res => {
     let reply = (res.message?.content || "我还在学习这个问题～")
