@@ -267,77 +267,34 @@ footer{
 
 <div id="openChatBtn" onclick="toggleChat()">💬 AI 助手</div>
 
+<script src="https://js.puter.com/v2/"></script>
 <script>
 function scrollToSection(id){
   document.getElementById(id).scrollIntoView({behavior:'smooth'});
 }
 
-/* ===== 同义词归一化（核心）===== */
+/* ===== 同义词归一化 ===== */
 function normalizeText(text){
   return text
     .toLowerCase()
-    .replace(/[？?！!。，,]/g, "")
-    .replace(/啥/g, "什么")
-    .replace(/嘛/g, "")
-    .replace(/呀/g, "")
-    .replace(/啊/g, "")
-    .replace(/呢/g, "")
-    .replace(/吧/g, "")
+    .replace(/[？?！!。，,]/g,"")
+    .replace(/啥/g,"什么")
+    .replace(/嘛|呀|啊|呢|吧/g,"")
     .trim();
 }
 
+/* ===== 原规则问答 ===== */
 const qa = {
-
-  /* ===== 打招呼 ===== */
-  "你好": "你好呀 👋 我是这个作品集的 AI 小助手，有什么想了解的都可以问我～",
-  "您好": "您好～我是站内 AI 小助手，可以帮你介绍 AIGC 视频和高考志愿智能体哦 😊",
-  "嗨": "嗨～我在这儿呢！想知道视频怎么做，还是智能体怎么用？",
-  "哈喽": "哈喽～有什么可以帮你的吗？",
-  "在吗": "在呢在呢 😄 随时为你介绍这个作品集～",
-  "hi": "Hi～我是 AI 小助手，欢迎来到我的作品集！",
-  "hello": "Hello～想了解 AIGC 视频还是高考志愿智能体？",
-
-  /* ===== 身份 ===== */
-  "你是谁": "我是这个作品集的 AI 小助手 😊，专门负责介绍站内的 AIGC 视频、高考志愿智能体和网页开发过程。",
-  "你是真人吗": "我不是真人，我是这个网站内置的 AI 小助手，用来展示 AIGC 在前端交互上的应用～",
-  "你是gpt吗": "我不是 GPT，也不是大模型，我是用 JavaScript 实现的规则型 AI 小助手，更适合课程展示场景。",
-  "你是chatgpt吗": "不是哦～我是本地运行的 AI 小助手，不涉及云端大模型，这样可以更稳定地用于作业展示。",
-
-  /* ===== 能力（重点） ===== */
-  "你会什么": "我会介绍这个作品集哦～比如 AIGC 视频是怎么做的、高考志愿智能体有什么功能，还有这个网页的开发过程。更复杂的问题，可以交给我的高考志愿 AI 智能体来处理 👉",
-  "你能干嘛": "我可以帮你了解这个网站的所有作品，包括视频创作、智能体功能和网页实现方式。",
-  "你有什么功能": "我的功能是：介绍 AIGC 作品、讲解高考志愿智能体、说明网页开发流程，并引导你体验真正的 AI 智能体。",
-  "功能": "我会介绍这个作品集哦～包括 AIGC 视频、高考志愿智能体和网页开发过程。深入问题可以体验我的高考志愿 AI 智能体 👉",
-
-  /* ===== AIGC 视频 ===== */
-  "视频": "这两条视频都是我用 AIGC 工具制作的，从脚本、画面到配音都由 AI 完成，最后用剪辑工具合成。",
-  "古人辩论": "《古人辩论（度量）》是用 AI 生成的国风动画，结合了 LLM 和 AI 绘画技术。",
-  "创意": "这条创意短视频是我做 AIGC 全流程创作的实验作品，用来探索 AI 在短视频领域的应用。",
-  "怎么做视频": "先用 AI 生成脚本和分镜，再用 AI 绘图工具生成画面，接着用 AI 配音，最后用剪辑软件合成。",
-
-  /* ===== AI 智能体 ===== */
-  "智能体": "这是我基于腾讯元器平台搭建的高考志愿规划智能体，能查学校、查专业、生成冲稳保志愿方案。",
-  "高考": "我的智能体专门针对高考志愿填报，支持新高考省份的规则解析和个性化方案生成。",
-  "志愿": "志愿填报的关键是位次换算和梯度设置，我的智能体可以自动生成合理的冲稳保方案。",
-  "元器": "腾讯元器是一个智能体搭建平台，我用它开发了高考志愿规划助手，不需要写复杂代码。",
-  "智能体能干嘛": "它可以帮你查院校、查专业、分析录取概率，还能根据你的分数生成志愿填报方案。",
-
-  /* ===== 网页 ===== */
-  "网页": "这是一个响应式作品集网页，适配电脑和手机，完全用 HTML + CSS + JavaScript 实现。",
-  "前端": "我用的是原生前端技术，没有使用框架，方便老师检查源码和提交作业。",
-  "怎么做的": "整个网页的结构、样式和部分文案，都是用 AI 辅助生成的，属于 AIGC 实践项目。",
-  "AIGC": "AIGC 是人工智能生成内容的简称，包括文字、图片、音频和视频，这个网站本身就是 AIGC 的应用案例。",
-
-  /* ===== 作业 ===== */
-  "作业": "这是我的《AI 辅助网页创作》课程作业，集成了 AIGC 视频、AI 智能体和前端交互系统。",
-  "项目": "该项目展示了 AIGC 在视频创作、智能体搭建和网页开发三个方向的综合应用能力。",
-
-  /* ===== 联系 ===== */
-  "联系": "你可以通过页面底部的联系表单给我留言，我会尽快回复你～",
-  "谢谢": "不客气，很高兴为你介绍我的作品 😊",
-  "再见": "再见啦～如果想深入了解志愿填报，记得去体验我的高考志愿 AI 智能体哦 👋"
+  "你好":"你好呀 👋 我是这个作品集的 AI 小助手～",
+  "你是谁":"我是站内 AI 小助手，负责介绍 AIGC 视频、高考志愿智能体和网页开发过程。",
+  "你会什么":"我会介绍这个作品集，也可以帮你解答基础问题，复杂问题我会交给 DeepSeek 大模型哦 😊",
+  "视频":"这两条视频都是用 AIGC 工具制作的，从脚本、画面到配音都由 AI 完成。",
+  "智能体":"这是我基于腾讯元器搭建的高考志愿规划智能体，可以生成冲稳保方案。",
+  "网页":"这是一个响应式作品集网页，用 HTML + CSS + JS 原生实现。",
+  "作业":"这是《AI 辅助网页创作》课程作业，集成了 AIGC 视频、AI 智能体和前端交互系统。"
 };
 
+/* ===== 发送消息 ===== */
 function ask(){
   const input = document.getElementById("userInput");
   const log = document.getElementById("chatlog");
@@ -345,26 +302,37 @@ function ask(){
   if(!rawText) return;
 
   log.innerHTML += `<div class="msg user">${rawText}</div>`;
-  log.innerHTML += `<div class="msg bot">正在思考…</div>`;
+  log.innerHTML += `<div class="msg bot">🤖 正在思考…</div>`;
   log.scrollTop = log.scrollHeight;
   input.value = "";
 
   const text = normalizeText(rawText);
 
-  setTimeout(()=>{
-    const thinking = document.querySelector("#chatlog .msg.bot:last-child");
-    let reply = "这个问题我还在学习中～<br>你可以去体验我的 <a href='https://yuanqi.tencent.com/webim/#/chat/bgIGWH?appid=2066320071764652288&experience=true' target='_blank'>高考志愿 AI 智能体</a>，它更专业 👉";
-
-    for(const k in qa){
-      if(text.includes(k)){
-        reply = qa[k];
-        break;
-      }
+  /* 命中规则 → 本地回复 */
+  for(const k in qa){
+    if(text.includes(k)){
+      setTimeout(()=>{
+        updateLastMsg(qa[k]);
+      },600);
+      return;
     }
+  }
 
-    thinking.innerHTML = reply;
-    log.scrollTop = log.scrollHeight;
-  },800);
+  /* 未命中 → 调用 DeepSeek */
+  puter.ai.chat(text, { model: "deepseek/deepseek-chat" })
+    .then(res => {
+      updateLastMsg("🤖 " + res);
+    })
+    .catch(()=>{
+      updateLastMsg("⚠️ 暂时无法访问 DeepSeek，你可以先体验我的高考志愿智能体 👉");
+    });
+}
+
+/* ===== 更新最后一条消息 ===== */
+function updateLastMsg(text){
+  const log = document.getElementById("chatlog");
+  const last = log.querySelector(".bot:last-child");
+  if(last) last.innerHTML = text;
 }
 
 function toggleChat(){
