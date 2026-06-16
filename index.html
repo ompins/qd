@@ -93,7 +93,6 @@ nav a:hover{color:var(--primary)}
   background:#fff;
   box-shadow:0 6px 16px rgba(0,0,0,.06);
 }
-.agent img{width:72px;margin-bottom:12px;}
 
 /* 聊天框 */
 #chatbot{
@@ -127,11 +126,21 @@ nav a:hover{color:var(--primary)}
 }
 .bot{background:#f1f5f9;}
 .user{background:#dbeafe;text-align:right;}
+
 #chatbot input{
-  width:100%;
   border:none;
-  border-top:1px solid #eee;
   padding:10px;
+  flex:1;
+}
+#chatbot button{
+  border:none;
+  background:var(--primary);
+  color:#fff;
+  padding:0 14px;
+  cursor:pointer;
+}
+#chatbot button:hover{
+  background:#1d4ed8;
 }
 
 #openChatBtn{
@@ -162,10 +171,10 @@ footer{
 <header>
   <div><strong>AI Portfolio</strong></div>
   <nav>
-    <a href="javascript:void(0)" onclick="document.getElementById('top').scrollIntoView({behavior:'smooth'})">首页</a>
-    <a href="javascript:void(0)" onclick="document.getElementById('videos').scrollIntoView({behavior:'smooth'})">AIGC视频</a>
-    <a href="javascript:void(0)" onclick="document.getElementById('agent').scrollIntoView({behavior:'smooth'})">AI智能体</a>
-    <a href="javascript:void(0)" onclick="document.getElementById('contact').scrollIntoView({behavior:'smooth'})">联系</a>
+    <a href="#" onclick="scrollToSection('top')">首页</a>
+    <a href="#" onclick="scrollToSection('videos')">AIGC视频</a>
+    <a href="#" onclick="scrollToSection('agent')">AI智能体</a>
+    <a href="#" onclick="scrollToSection('contact')">联系</a>
   </nav>
 </header>
 
@@ -175,62 +184,40 @@ footer{
     集成 AI 生成短视频、AI 智能体与智能问答系统，
     全流程由 AIGC 工具辅助开发
   </p>
-
-  <!-- ✅ 新增一行 -->
   <p style="opacity:.85;margin-top:-6px;">
     支持视频创作 · 志愿填报 · 智能对话 · 网页开发
   </p>
-
   <a class="btn" href="#videos">查看作品</a>
 </section>
 
-<!-- ✅ AIGC 短视频（带封面） -->
 <section id="videos" class="section">
   <h2>AIGC 短视频作品</h2>
   <div class="video-grid">
-
     <div class="video-card">
-      <img src="cover1.png"
-           alt="古人辩论封面">
+      <img src="cover1.png" alt="">
       <p><strong>《古人辩论（度量）》</strong></p>
-      <a class="btn" href="https://www.bilibili.com/video/BV1dXEe6zEPh" target="_blank">
-        ▶ 在 B站观看
-      </a>
+      <a class="btn" href="https://www.bilibili.com/video/BV1dXEe6zEPh" target="_blank">▶ 在 B站观看</a>
     </div>
-
     <div class="video-card">
-      <img src="cover2.png"
-           alt="AI创意短视频封面">
+      <img src="cover2.png" alt="">
       <p><strong>AI 创意短视频</strong></p>
-      <a class="btn" href="https://www.bilibili.com/video/BV1vDER6aEnG" target="_blank">
-        ▶ 在 B站观看
-      </a>
+      <a class="btn" href="https://www.bilibili.com/video/BV1vDER6aEnG" target="_blank">▶ 在 B站观看</a>
     </div>
-
   </div>
 </section>
 
 <section id="agent" class="section">
   <h2>AI 智能体作品</h2>
-
   <div class="agent">
-    <!-- ✅ 智能体示意图片 -->
-    <img src="agent.png"
-         alt="高考志愿智能体界面示意"
-         style="width:220px;margin-bottom:16px;border-radius:10px;box-shadow:0 4px 12px rgba(0,0,0,.1);">
-
+    <img src="agent.png" style="width:220px;border-radius:10px;">
     <h3>高考志愿规划智能体（腾讯元器）</h3>
-
-    <p style="max-width:640px;margin:10px auto;line-height:1.8;">
-      ✅ 支持全国多省份高考政策解析<br>
-      ✅ 院校与专业数据实时查询<br>
-      ✅ 冲 / 稳 / 保 志愿方案智能生成<br>
-      ✅ 自然语言对话，使用门槛低
+    <p>
+      ✅ 多省份高考政策解析<br>
+      ✅ 院校 & 专业数据查询<br>
+      ✅ 冲 / 稳 / 保 智能方案<br>
+      ✅ 自然语言对话
     </p>
-
-    <a class="btn"
-       href="https://yuanqi.tencent.com/webim/#/chat/bgIGWH?appid=2066320071764652288&experience=true"
-       target="_blank">
+    <a class="btn" href="https://yuanqi.tencent.com/webim/#/chat/bgIGWH?appid=2066320071764652288&experience=true" target="_blank">
       立即体验智能体 →
     </a>
   </div>
@@ -238,10 +225,7 @@ footer{
 
 <section id="contact" class="section">
   <h2>联系我</h2>
-  <form 
-    style="max-width:600px;margin:auto;display:flex;flex-direction:column;gap:14px"
-    onsubmit="event.preventDefault();alert('✅ 感谢你的留言，我会尽快回复你！');this.reset();"
-  >
+  <form onsubmit="event.preventDefault();alert('✅ 感谢留言！');this.reset();">
     <input placeholder="姓名" required>
     <input placeholder="邮箱" required type="email">
     <textarea rows="4" placeholder="留言"></textarea>
@@ -249,9 +233,7 @@ footer{
   </form>
 </section>
 
-<footer>
-  © 2026 AI Portfolio · AIGC辅助网页创作项目
-</footer>
+<footer>© 2026 AI Portfolio · AIGC辅助网页创作项目</footer>
 
 <!-- 聊天框 -->
 <div id="chatbot">
@@ -259,10 +241,13 @@ footer{
   <div id="chatlog">
     <div class="msg bot">
       你好呀 👋 我是站内 AI 小助手<br>
-      你可以问我关于视频、智能体或网页的问题哦！
+      可以问我关于视频、智能体或网页的问题哦！
     </div>
   </div>
-  <input id="userInput" placeholder="输入问题…">
+  <div style="display:flex;border-top:1px solid #eee;">
+    <input id="userInput" placeholder="输入问题…">
+    <button onclick="ask()">发送</button>
+  </div>
 </div>
 
 <div id="openChatBtn" onclick="toggleChat()">💬 AI 助手</div>
@@ -273,40 +258,36 @@ function scrollToSection(id){
   document.getElementById(id).scrollIntoView({behavior:'smooth'});
 }
 
-/* ===== 同义词归一化 ===== */
-function normalizeText(text){
-  return text
-    .toLowerCase()
+function normalizeText(t){
+  return t.toLowerCase()
     .replace(/[？?！!。，,]/g,"")
     .replace(/啥/g,"什么")
     .replace(/嘛|呀|啊|呢|吧/g,"")
     .trim();
 }
 
-/* ===== 原规则问答 ===== */
 const qa = {
   "你好":"你好呀 👋 我是这个作品集的 AI 小助手～",
   "你是谁":"我是站内 AI 小助手，负责介绍 AIGC 视频、高考志愿智能体和网页开发过程。",
-  "你会什么":"我会介绍这个作品集，也可以帮你解答基础问题，复杂问题我会交给 DeepSeek 大模型哦 😊",
+  "你会什么":"我会介绍这个作品集，也会请 DeepSeek 帮我一起回答复杂问题 😊",
   "视频":"这两条视频都是用 AIGC 工具制作的，从脚本、画面到配音都由 AI 完成。",
   "智能体":"这是我基于腾讯元器搭建的高考志愿规划智能体，可以生成冲稳保方案。",
   "网页":"这是一个响应式作品集网页，用 HTML + CSS + JS 原生实现。",
   "作业":"这是《AI 辅助网页创作》课程作业，集成了 AIGC 视频、AI 智能体和前端交互系统。"
 };
 
-/* ===== 发送消息 ===== */
 function ask(){
   const input = document.getElementById("userInput");
   const log = document.getElementById("chatlog");
-  const rawText = input.value.trim();
-  if(!rawText) return;
+  const raw = input.value.trim();
+  if(!raw) return;
 
-  log.innerHTML += `<div class="msg user">${rawText}</div>`;
+  log.innerHTML += `<div class="msg user">${raw}</div>`;
   log.innerHTML += `<div class="msg bot">🤖 正在思考…</div>`;
   log.scrollTop = log.scrollHeight;
   input.value = "";
 
-  const text = normalizeText(rawText);
+  const text = normalizeText(raw);
 
   for(const k in qa){
     if(text.includes(k)){
@@ -321,28 +302,21 @@ function ask(){
         role: "system",
         content: "你是这个 AI 作品集网站的站内小助手。语气活泼、简短，像学生做的作品，不要说“我是人工智能助手”，直接回答。"
       },
-      {
-        role: "user",
-        content: text
-      }
+      { role: "user", content: text }
     ],
     model: "deepseek/deepseek-v4-flash"
   })
   .then(res => {
     let reply = (res.message?.content || "我还在学习这个问题～")
       .replace(/我是.*?助手/g,"")
-      .replace(/由.*?训练/g,"")
       .trim();
     updateLastMsg("🤖 " + reply);
   })
   .catch(()=>{
-    updateLastMsg(
-      "这个问题我还在学习中～<br>你可以去体验我的 <a href='https://yuanqi.tencent.com/webim/#/chat/bgIGWH?appid=2066320071764652288&experience=true' target='_blank'>高考志愿 AI 智能体</a>，它更专业 👉"
-    );
+    updateLastMsg("这个问题我还在学习中～<br>可以去体验我的 <a href='https://yuanqi.tencent.com/webim/#/chat/bgIGWH?appid=2066320071764652288&experience=true' target='_blank'>高考志愿 AI 智能体</a> 👉");
   });
 }
 
-/* ===== 更新最后一条消息 ===== */
 function updateLastMsg(text){
   const log = document.getElementById("chatlog");
   const last = log.querySelector(".bot:last-child");
@@ -350,24 +324,16 @@ function updateLastMsg(text){
 }
 
 function toggleChat(){
-  const chat = document.getElementById("chatbot");
-  const btn = document.getElementById("openChatBtn");
-  chat.style.display = chat.style.display === "none" ? "block" : "none";
-  btn.style.display = chat.style.display === "none" ? "block" : "none";
+  const c = document.getElementById("chatbot");
+  const b = document.getElementById("openChatBtn");
+  c.style.display = c.style.display === "none" ? "block" : "none";
+  b.style.display = c.style.display === "none" ? "block" : "none";
 }
 
-/* ===== 回车发送（✅ 已修复） ===== */
-document.addEventListener("DOMContentLoaded", function () {
-  const input = document.getElementById("userInput");
-  if (input) {
-    input.addEventListener("keydown", function (e) {
-      if (e.key === "Enter") {
-        e.preventDefault();
-        ask();
-      }
-    });
-  }
+document.getElementById("userInput").addEventListener("keydown", e=>{
+  if(e.key === "Enter"){ e.preventDefault(); ask(); }
 });
 </script>
+
 </body>
 </html>
