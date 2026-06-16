@@ -326,6 +326,48 @@ function ask(){
         content: text
       }
     ],
-    model: "deepseek/deepseek-v4-flash
+    model: "deepseek/deepseek-v4-flash"
+  })
+  .then(res => {
+    let reply = (res.message?.content || "我还在学习这个问题～")
+      .replace(/我是.*?助手/g,"")
+      .replace(/由.*?训练/g,"")
+      .trim();
+    updateLastMsg("🤖 " + reply);
+  })
+  .catch(()=>{
+    updateLastMsg(
+      "这个问题我还在学习中～<br>你可以去体验我的 <a href='https://yuanqi.tencent.com/webim/#/chat/bgIGWH?appid=2066320071764652288&experience=true' target='_blank'>高考志愿 AI 智能体</a>，它更专业 👉"
+    );
+  });
+}
+
+/* ===== 更新最后一条消息 ===== */
+function updateLastMsg(text){
+  const log = document.getElementById("chatlog");
+  const last = log.querySelector(".bot:last-child");
+  if(last) last.innerHTML = text;
+}
+
+function toggleChat(){
+  const chat = document.getElementById("chatbot");
+  const btn = document.getElementById("openChatBtn");
+  chat.style.display = chat.style.display === "none" ? "block" : "none";
+  btn.style.display = chat.style.display === "none" ? "block" : "none";
+}
+
+/* ===== 回车发送（✅ 已修复） ===== */
+document.addEventListener("DOMContentLoaded", function () {
+  const input = document.getElementById("userInput");
+  if (input) {
+    input.addEventListener("keydown", function (e) {
+      if (e.key === "Enter") {
+        e.preventDefault();
+        ask();
+      }
+    });
+  }
+});
+</script>
 </body>
 </html>
